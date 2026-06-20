@@ -106,13 +106,162 @@ board.create("text", [b - 0.6, 0.2, "Riemann rectangles"], { color: "#fff" });`,
     content: `<h3>The takeaway</h3>
 <p>Differentiation and integration aren\'t two separate worlds — they\'re two ends of the same bridge. Every derivative question has an integration twin, and vice versa.</p>`,
   },
+  // ========================================
+  // Grid demo — various block types & column configurations
+  // ========================================
+  {
+    id: "b_grid_intro",
+    type: "html",
+    content: `<h2>Grid layout demo</h2>
+<p>Below are several CSS grid blocks demonstrating different column configurations, gap sizes, and mixed block types inside grid cells.</p>`,
+  },
+  {
+    id: "b_grid_2col",
+    type: "grid",
+    content: "",
+    settings: {
+      gridColumns: 2,
+      gridGap: "md",
+      gridAlign: "stretch",
+      responsive: true,
+      cells: [
+        {
+          id: "gc_2col_left",
+          blocks: [
+            {
+              id: "bg_2col_html",
+              type: "html",
+              content: `<h3>Left: Riemann intuition</h3>
+<p>Imagine slicing the area under a curve into thin vertical strips. Each strip is roughly a rectangle of width Δx and height f(xᵢ). Summing their areas gives an approximation that improves as the strips get thinner.</p>`,
+            },
+          ],
+        },
+        {
+          id: "gc_2col_right",
+          blocks: [
+            {
+              id: "bg_2col_katex",
+              type: "katex",
+              content: `\\\sum_{i=1}^{n} f(x_i)\\\,\\\Delta x \\\quad\\	ext{approximates}\\\quad \\\int_a^b f(x)\\\,dx`,
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "b_grid_3col",
+    type: "grid",
+    content: "",
+    settings: {
+      gridColumns: 3,
+      gridGap: "sm",
+      gridAlign: "stretch",
+      responsive: true,
+      cells: [
+        {
+          id: "gc_3col_1",
+          blocks: [
+            {
+              id: "bg_3col_html_1",
+              type: "html",
+              content: `<p><strong>Derivative</strong><br />
+Rate of change at a point. Slope of the tangent line.</p>`,
+            },
+            {
+              id: "bg_3col_katex_1",
+              type: "katex",
+              content: `f\\'(x) = \\\lim_{h\\	o 0}\\\frac{f(x+h)-f(x)}{h}`,
+            },
+          ],
+        },
+        {
+          id: "gc_3col_2",
+          blocks: [
+            {
+              id: "bg_3col_html_2",
+              type: "html",
+              content: `<p><strong>Integral</strong><br />
+Accumulated area under a curve over an interval.</p>`,
+            },
+            {
+              id: "bg_3col_katex_2",
+              type: "katex",
+              content: `\\\int_a^b f(x)\\\,dx`,
+            },
+          ],
+        },
+        {
+          id: "gc_3col_3",
+          blocks: [
+            {
+              id: "bg_3col_html_3",
+              type: "html",
+              content: `<p><strong>FTC</strong><br />
+Derivatives and integrals are inverse operations.</p>`,
+            },
+            {
+              id: "bg_3col_katex_3",
+              type: "katex",
+              content: `\\\int_a^b f = F(b) - F(a)`,
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    id: "b_grid_mixed",
+    type: "grid",
+    content: "",
+    settings: {
+      gridColumns: 2,
+      gridGap: "lg",
+      gridAlign: "center",
+      responsive: true,
+      cells: [
+        {
+          id: "gc_mixed_left",
+          blocks: [
+            {
+              id: "bg_mixed_mermaid",
+              type: "mermaid",
+              content: `flowchart LR
+  A["Problem"] --> B["Derive"]
+  B --> C["Integrate"]
+  C --> D["Solution"]`,
+            },
+          ],
+        },
+        {
+          id: "gc_mixed_right",
+          blocks: [
+            {
+              id: "bg_mixed_plot",
+              type: "plotly",
+              content: `{
+  "data": [
+    { "x": [1,2,3,4,5], "y": [1,4,9,16,25],
+      "type": "scatter", "mode": "lines+markers",
+      "marker": { "color": "#f472b6" } }
+  ],
+  "layout": { "title": "f(x) = x²",
+              "paper_bgcolor": "transparent",
+              "plot_bgcolor": "transparent" }
+}`,
+            },
+          ],
+        },
+      ],
+    },
+  },
 ];
 
 export const SAMPLE_LESSON: Lesson = {
   id: SAMPLE_LESSON_ID,
   title: "The Fundamental Theorem of Calculus",
   description:
-    "From rectangles to the integral in five steps — a guided tour through HTML, KaTeX, JSXGraph, Mermaid, Plotly, and GeoGebra working together.",
+    "From rectangles to the integral in five steps — a guided tour through HTML, KaTeX, JSXGraph, Mermaid, Plotly, GeoGebra, and CSS Grid working together.",
   blocks,
   createdAt: 0,
   updatedAt: 0,
