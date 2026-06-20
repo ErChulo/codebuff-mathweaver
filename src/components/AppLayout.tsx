@@ -35,8 +35,8 @@ export default function AppLayout() {
             to="/"
             className="glass-card p-4 flex items-center gap-3 hover:scale-[1.01] transition-transform"
           >
-            <div className="size-9 rounded-xl bg-primary/15 flex items-center justify-center glow-ring">
-              <span className="text-lg font-bold glow-text">∑</span>
+            <div className="size-9 rounded-xl overflow-hidden flex items-center justify-center bg-primary/15 glow-ring">
+              <img src="logo.png" alt="Math Weaver" className="size-9 object-contain" />
             </div>
             <div>
               <div className="font-semibold text-sm">Math Weaver</div>
