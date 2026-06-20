@@ -1,0 +1,383 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Glassmorphism tokens — sourced from the design spec. */
+  --color-glass: var(--glass);
+  --color-glass-strong: var(--glass-strong);
+  --color-glass-border: var(--glass-border);
+  --color-glow: var(--glow);
+  --color-luminous: var(--luminous);
+}
+
+/* ============================================================
+ * Light theme — restrained luminous color (a cool teal-cyan).
+ * ============================================================ */
+:root {
+  --radius: 0.85rem;
+
+  --background: oklch(0.985 0.005 240);
+  --foreground: oklch(0.18 0.02 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 250);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 250);
+
+  --primary: oklch(0.42 0.13 230);
+  --primary-foreground: oklch(0.99 0 0);
+
+  --secondary: oklch(0.96 0.01 250);
+  --secondary-foreground: oklch(0.2 0.02 250);
+
+  --muted: oklch(0.95 0.008 240);
+  --muted-foreground: oklch(0.5 0.015 250);
+
+  --accent: oklch(0.94 0.025 230);
+  --accent-foreground: oklch(0.2 0.02 250);
+
+  --destructive: oklch(0.6 0.22 25);
+
+  --border: oklch(0.9 0.01 250);
+  --input: oklch(0.92 0.01 250);
+  --ring: oklch(0.62 0.12 230);
+
+  /* Glass tokens — light: translucent white sandwich. */
+  --glass: rgb(255 255 255 / 0.55);
+  --glass-strong: rgb(255 255 255 / 0.72);
+  --glass-border: rgb(255 255 255 / 0.85);
+  --glow: oklch(0.7 0.13 230 / 0.5);
+  --luminous: oklch(0.66 0.15 220);
+
+  /* Quiz accent palette (HSL triplets so inline alpha works,
+   * e.g. `hsl(var(--quiz-cyan) / 0.08)`). */
+  --quiz-cyan: 195 90% 42%;
+  --quiz-magenta: 320 75% 50%;
+}
+
+/* ============================================================
+ * Dark theme — pure #000 background, restrained luminous color.
+ * ============================================================ */
+.dark {
+  /* Hard requirement: pure #000 background. */
+  --background: #000000;
+  --foreground: oklch(0.95 0.008 240);
+
+  --card: #0a0a0a;
+  --card-foreground: oklch(0.95 0.008 240);
+
+  --popover: #0a0a0a;
+  --popover-foreground: oklch(0.95 0.008 240);
+
+  --primary: oklch(0.72 0.16 230);
+  --primary-foreground: #000000;
+
+  --secondary: #0e0e0e;
+  --secondary-foreground: oklch(0.95 0.008 240);
+
+  --muted: #0c0c0c;
+  --muted-foreground: oklch(0.7 0.012 240);
+
+  --accent: #111111;
+  --accent-foreground: oklch(0.95 0.008 240);
+
+  --destructive: oklch(0.66 0.22 25);
+
+  --border: rgb(255 255 255 / 0.08);
+  --input: rgb(255 255 255 / 0.1);
+  --ring: oklch(0.72 0.15 230);
+
+  /* Glass tokens — dark: subtle white wash on pure black. */
+  --glass: rgb(255 255 255 / 0.04);
+  --glass-strong: rgb(255 255 255 / 0.08);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glow: oklch(0.7 0.15 220 / 0.45);
+  --luminous: oklch(0.78 0.13 220);
+
+  /* Quiz accents lifted in dark mode for legibility on pure black. */
+  --quiz-cyan: 195 95% 62%;
+  --quiz-magenta: 320 88% 68%;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  button:not([disabled]),
+  [role="button"]:not([disabled]) {
+    cursor: pointer;
+  }
+}
+
+/* ============================================================
+ * Glassmorphism primitives — used by .glass-card and friends.
+ * ============================================================ */
+@layer components {
+  .glass-card {
+    background-color: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.4) inset,
+      0 -1px 0 0 rgb(0 0 0 / 0.08) inset,
+      0 10px 30px -10px rgb(0 0 0 / 0.35),
+      0 2px 6px -2px rgb(0 0 0 / 0.2);
+    position: relative;
+    border-radius: var(--radius-lg);
+  }
+
+  .dark .glass-card {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.06) inset,
+      0 -1px 0 0 rgb(0 0 0 / 0.4) inset,
+      0 0 0 1px rgb(255 255 255 / 0.04),
+      0 20px 60px -20px rgb(255 255 255 / 0.05),
+      0 4px 18px -4px rgb(0 0 0 / 0.6);
+  }
+
+  .glass-card-strong {
+    background-color: var(--color-glass-strong);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.5) inset,
+      0 -1px 0 0 rgb(0 0 0 / 0.12) inset,
+      0 16px 40px -16px rgb(0 0 0 / 0.4),
+      0 3px 8px -3px rgb(0 0 0 / 0.25);
+    border-radius: var(--radius-lg);
+  }
+
+  .dark .glass-card-strong {
+    box-shadow:
+      0 1px 0 0 rgb(255 255 255 / 0.08) inset,
+      0 -1px 0 0 rgb(0 0 0 / 0.5) inset,
+      0 0 0 1px rgb(255 255 255 / 0.06),
+      0 24px 80px -24px rgb(124 196 255 / 0.15),
+      0 6px 20px -6px rgb(0 0 0 / 0.7);
+  }
+
+  .glass-panel {
+    background-color: var(--color-glass);
+    border: 1px solid var(--color-glass-border);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
+    border-radius: var(--radius-md);
+  }
+
+  /* Luminous accent — used for highlights, glows, and emphasis. */
+  .glow-text {
+    color: var(--color-luminous);
+    text-shadow: 0 0 18px var(--color-glow);
+  }
+
+  .glow-ring {
+    box-shadow: 0 0 0 1px var(--color-glow), 0 0 24px var(--color-glow);
+  }
+
+  .luminous-divider {
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-luminous),
+      transparent
+    );
+    height: 1px;
+    opacity: 0.6;
+  }
+
+  /* Quiz accents — cyan / magenta text + glow ring. */
+  .quiz-cyan-text {
+    color: hsl(var(--quiz-cyan));
+  }
+  .quiz-magenta-text {
+    color: hsl(var(--quiz-magenta));
+  }
+  .quiz-glow-border {
+    box-shadow:
+      0 0 0 1px hsl(var(--quiz-cyan) / 0.32),
+      0 0 18px hsl(var(--quiz-cyan) / 0.12);
+  }
+}
+
+/* ============================================================
+ * Decorative background — aurora of restrained luminous color.
+ * Pure black in dark mode, subtle wash in light mode.
+ * ============================================================ */
+.bg-aurora {
+  background-image:
+    radial-gradient(
+      ellipse 60% 50% at 30% 20%,
+      oklch(0.75 0.13 220 / 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 75% 80%,
+      oklch(0.7 0.2 290 / 0.14),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 60% 50%,
+      oklch(0.78 0.16 180 / 0.1),
+      transparent 60%
+    );
+}
+
+.dark .bg-aurora {
+  background-image:
+    radial-gradient(
+      ellipse 60% 50% at 30% 20%,
+      oklch(0.65 0.18 220 / 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 75% 80%,
+      oklch(0.6 0.22 290 / 0.16),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 60% 50%,
+      oklch(0.7 0.2 180 / 0.12),
+      transparent 60%
+    );
+}
+
+/* KaTeX override — keep crisp on the glass background. */
+.katex-display {
+  margin: 0 !important;
+}
+
+/* Mermaid SVG should sit on the panel, not blow out the layout. */
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* JSXGraph container minimum height for usability. */
+.jsxgraph-host {
+  width: 100%;
+  height: 320px;
+}
+
+/* Scrollbars — tinted to the luminous palette. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--glass-strong);
+  border-radius: 999px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Utility: clip text on long titles. */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Utility: motion safe entrance. */
+@keyframes glass-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: glass-fade-in 320ms ease-out both;
+}
+
+/* ============================================================
+ * Hero floating cards — slow vertical drift, optional tilt.
+ * Three offset cycles so the three cards never align.
+ * ============================================================ */
+@keyframes drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+@keyframes drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0.4deg);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0) rotate(-0.5deg);
+  }
+}
+
+@keyframes drift-c {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+}
+
+.drift-a {
+  animation: drift-a 7s ease-in-out infinite;
+}
+.drift-b {
+  animation: drift-b 9.5s ease-in-out infinite;
+}
+.drift-c {
+  animation: drift-c 8.5s ease-in-out infinite 1.2s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-a,
+  .drift-b,
+  .drift-c {
+    animation: none;
+  }
+}
