@@ -1,7 +1,7 @@
 import { Toaster } from "@/components/ui/sonner";
 import { StrictMode, useEffect, lazy, Suspense } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes, useLocation } from "react-router";
+import { HashRouter, Route, Routes, useLocation } from "react-router";
 import { ThemeProvider } from "@/hooks/useTheme";
 import "./index.css";
 import "./types/global.d.ts";
@@ -60,7 +60,7 @@ function RouteSyncer() {
 // (Landing, NotFound) share the same theme context.
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <HashRouter>
       <ThemeProvider>
         <RouteSyncer />
         <Suspense fallback={<RouteLoading />}>
@@ -86,6 +86,6 @@ createRoot(document.getElementById("root")!).render(
         </Suspense>
         <Toaster />
       </ThemeProvider>
-    </BrowserRouter>
+    </HashRouter>
   </StrictMode>
 );
