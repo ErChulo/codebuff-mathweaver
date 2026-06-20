@@ -6,11 +6,17 @@ import { parseMarkdown } from "@/lib/markdown";
 export interface MarkdownRendererProps {
   source: string;
   className?: string;
+  /** When true, render inline content without block-level wrappers (no <div>, no <p>). */
+  inline?: boolean;
 }
 
 /** Tiny markdown + LaTeX renderer. Reuses the existing KaTeX CDN loader. */
-export default function MarkdownRenderer({ source, className }: MarkdownRendererProps) {
+export default function MarkdownRenderer({ source, className, inline: isInline }: MarkdownRendererProps) {
   const blocks = useMemo(() => parseMarkdown(source), [source]);
+
+  if (isInline) {
+    return <RenderInlineContent blocks={blocks} />;
+  }
 
   return (
     <div className={className ?? "md-lesson space-y-3 text-[15px] leading-relaxed"}>
@@ -19,6 +25,22 @@ export default function MarkdownRenderer({ source, className }: MarkdownRenderer
       ))}
     </div>
   );
+}
+
+/** Renders the inline children of the first paragraph without any block wrapper. */
+function RenderInlineContent({ blocks }: { blocks: Block[] }) {
+  const children = useMemo(() => {
+    const parts: React.ReactNode[] = [];
+    blocks.forEach((b, i) => {
+      if (b.type === "paragraph" || b.type === "heading") {
+        parts.push(<>{renderInline(b.children)}</>);
+      } else {
+        parts.push(<span key={i} className="text-muted-foreground">Unsupported inline block</span>);
+      }
+    });
+    return parts;
+  }, [blocks]);
+  return <>{children}</>;
 }
 
 function RenderBlock({ block }: { block: Block }) {

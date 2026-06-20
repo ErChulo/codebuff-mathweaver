@@ -9,6 +9,7 @@ import { ArrowLeft, Plus, Save, Sparkles, Trash2, Download } from "lucide-react"
 import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import BlockRenderer from "@/components/BlockRenderer";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 
 export default function QuizEditor({ mode }: { mode: "create" | "edit" }) {
   const { id } = useParams<{ id: string }>();
@@ -436,7 +437,7 @@ export default function QuizEditor({ mode }: { mode: "create" | "edit" }) {
                       Live preview
                     </div>
                     <div className="glass-panel p-3">
-                      <p className="text-sm font-medium">{q.prompt}</p>
+                      <MarkdownRenderer source={q.prompt} />
                       {(q.blocks ?? []).map((b) => (
                         <BlockRenderer key={b.id} block={b} />
                       ))}
@@ -451,7 +452,8 @@ export default function QuizEditor({ mode }: { mode: "create" | "edit" }) {
                                 : "bg-white/5"
                             )}
                           >
-                            <strong>{String.fromCharCode(65 + oIdx)}.</strong> {o.label}
+                            <strong>{String.fromCharCode(65 + oIdx)}.</strong>{' '}
+                            <MarkdownRenderer source={o.label} inline />
                           </div>
                         ))}
                       </div>

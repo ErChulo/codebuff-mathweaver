@@ -3,6 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import db, { recordScore, type Quiz, type QuizOption, type QuizQuestion, type Block } from "@/lib/db";
 import { useState } from "react";
 import BlockRenderer from "@/components/BlockRenderer";
+import MarkdownRenderer from "@/components/MarkdownRenderer";
 import { ArrowLeft, ArrowRight, CheckCircle2, RotateCcw, X } from "lucide-react";
 import { toast } from "sonner";
 
@@ -111,7 +112,9 @@ export default function QuizRunner() {
                   </span>
                   <span className="text-sm font-medium">Question {i + 1}</span>
                 </div>
-                <p className="text-sm mb-3">{q.prompt}</p>
+                <div className="text-sm mb-3">
+                  <MarkdownRenderer source={q.prompt} />
+                </div>
                 <div className="space-y-2">
                   {q.options.map((o: QuizOption, oIdx: number) => (
                     <div
@@ -127,7 +130,7 @@ export default function QuizRunner() {
                       <span className="font-medium mr-2">
                         {String.fromCharCode(65 + oIdx)}.
                       </span>
-                      {o.label}
+                      <MarkdownRenderer source={o.label} inline />
                       {oIdx === q.correctIndex && (
                         <span className="ml-2 text-[11px] text-primary">Correct</span>
                       )}
@@ -188,9 +191,10 @@ export default function QuizRunner() {
 
       <div className="glass-card-strong p-8 space-y-5">
         <div className="space-y-3">
-          <h2 className="text-2xl font-semibold glow-text leading-snug">
-            {current.prompt}
-          </h2>
+          <MarkdownRenderer
+            source={current.prompt}
+            className="text-2xl font-semibold glow-text leading-snug space-y-0"
+          />
           {current.blocks?.map((b: Block) => (
             <BlockRenderer key={b.id} block={b} />
           ))}
@@ -219,7 +223,7 @@ export default function QuizRunner() {
                   >
                     {String.fromCharCode(65 + oIdx)}
                   </span>
-                  <span>{o.label}</span>
+                  <span><MarkdownRenderer source={o.label} inline /></span>
                 </div>
               </button>
             );
