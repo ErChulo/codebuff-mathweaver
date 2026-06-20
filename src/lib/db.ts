@@ -14,7 +14,8 @@ export type BlockType =
   | "mathbox"
   | "mathlive"
   | "manim"
-  | "geogebra";
+  | "geogebra"
+  | "grid";
 
 export interface Block {
   id: string;
@@ -23,6 +24,11 @@ export interface Block {
   content: string;
   /** Optional per-block settings (e.g. Plotly layout override or caption). */
   settings?: Record<string, unknown>;
+}
+
+export interface GridCell {
+  id: string;
+  blocks: Block[];
 }
 
 export interface QuizOption {

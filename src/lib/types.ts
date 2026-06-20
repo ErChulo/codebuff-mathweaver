@@ -190,6 +190,17 @@ Describe what this animation shows.",
   "showMenuBar": true\
 }',
   },
+  grid: {
+    type: "grid",
+    label: "Grid",
+    tagline: "CSS grid layout for side-by-side content",
+    description:
+      "Arrange multiple blocks in a responsive grid with auto-collapse on mobile. Each cell can contain its own content blocks.",
+    icon: "⊞",
+    cdnJs: "",
+    placeholder: "",
+    defaultContent: "",
+  },
 };
 
 export const BLOCK_TYPES = Object.keys(TECH) as BlockType[];

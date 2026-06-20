@@ -1,7 +1,8 @@
 import { memo, useEffect, useMemo, useRef, useState } from "react";
 import { loadTech } from "@/lib/cdn";
+import { cn } from "@/lib/utils";
 import { TECH, type TechMeta } from "@/lib/types";
-import type { Block } from "@/lib/db";
+import type { Block, GridCell } from "@/lib/db";
 
 export interface BlockRendererProps {
   block: Block;
@@ -56,6 +57,8 @@ const BlockBody = memo(function BlockBody({ block, meta }: { block: Block; meta:
       return <ManimBody content={block.content} />;
     case "geogebra":
       return <GeoGebraBody content={block.content} />;
+    case "grid":
+      return <GridBody block={block} />;
     default:
       return (
         <div className="p-4 text-sm text-muted-foreground">
@@ -390,6 +393,60 @@ const GeoGebraBody = memo(function GeoGebraBody({ content }: { content: string }
     <div className="p-2">
       {err && <div className="text-destructive text-xs mb-2">{err}</div>}
       <div ref={ref} className="w-full min-h-[400px]" />
+    </div>
+  );
+});
+
+// =========================================================
+// Grid — responsive CSS grid layout with cell blocks.
+// =========================================================
+const GridBody = memo(function GridBody({ block }: { block: Block }) {
+  const settings = block.settings ?? {};
+  const columns = (settings.gridColumns as number) ?? 2;
+  const gap = (settings.gridGap as string) ?? "md";
+  const align = (settings.gridAlign as string) ?? "stretch";
+  const responsive = settings.responsive !== false;
+  const cells = (settings.cells as GridCell[]) ?? [];
+
+  const gapClass =
+    gap === "sm" ? "gap-2" : gap === "lg" ? "gap-6" : "gap-4";
+  const alignClass =
+    align === "start"
+      ? "items-start"
+      : align === "center"
+        ? "items-center"
+        : align === "end"
+          ? "items-end"
+          : "items-stretch";
+
+  if (cells.length === 0) {
+    return (
+      <div className="p-6 text-center text-sm text-muted-foreground">
+        Empty grid — add cells in the editor
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className={cn("grid grid-cols-1 p-5", gapClass, alignClass, "grid-body")}
+      style={
+        responsive
+          ? ({ "--grid-cols": columns } as React.CSSProperties)
+          : ({ gridTemplateColumns: `repeat(${columns}, 1fr)` } as React.CSSProperties)
+      }
+    >
+      {cells.map((cell) => (
+        <div key={cell.id} className="glass-card overflow-hidden">
+          {cell.blocks.length === 0 ? (
+            <div className="p-6 text-center text-sm text-muted-foreground">
+              Empty cell
+            </div>
+          ) : (
+            cell.blocks.map((b) => <BlockRenderer key={b.id} block={b} />)
+          )}
+        </div>
+      ))}
     </div>
   );
 });
