@@ -173,7 +173,7 @@ export default function LessonEditor({ mode }: { mode: "create" | "edit" }) {
       <BlockEditor blocks={blocks} onChange={setBlocks} />
 
       {preview && blocks.length > 0 && (
-        <section className="space-y-3 pt-6 border-t border-white/10">
+        <section className="space-y-3 pt-6 border-t border-white/10 max-w-6xl">
           <div className="text-xs uppercase tracking-wider text-muted-foreground">
             Full preview
           </div>

@@ -86,7 +86,7 @@ const FEATURES: Feature[] = [
   {
     icon: Compass,
     title: "A typed library",
-    body: "Twelve curated stacks — React, Rust, Postgres, the Web Platform — each linking lessons to their own quiz threads.",
+    body: "Curated math tool stacks — KaTeX, Mermaid, Plotly, GeoGebra, and more — each linking lessons to their own quiz threads.",
     to: "/technologies",
     cta: "Explore library",
     accent: "magenta",
@@ -246,7 +246,7 @@ export default function Landing() {
           className="group flex items-center gap-2.5 text-sm font-medium"
         >
           <span className="size-8 rounded-xl overflow-hidden flex items-center justify-center bg-primary/15 glow-ring transition-colors">
-            <img src="logo.png" alt="Math Weaver" className="size-8 object-contain" />
+            <span className="text-xs font-bold tracking-tight text-primary">MW</span>
           </span>
           <span>Math Weaver</span>
           <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase tracking-[0.2em] text-muted-foreground glass-panel">

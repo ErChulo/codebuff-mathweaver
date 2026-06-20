@@ -36,7 +36,7 @@ export default function AppLayout() {
             className="glass-card p-4 flex items-center gap-3 hover:scale-[1.01] transition-transform"
           >
             <div className="size-9 rounded-xl overflow-hidden flex items-center justify-center bg-primary/15 glow-ring">
-              <img src="logo.png" alt="Math Weaver" className="size-9 object-contain" />
+              <span className="text-xs font-bold tracking-tight text-primary">MW</span>
             </div>
             <div>
               <div className="font-semibold text-sm">Math Weaver</div>

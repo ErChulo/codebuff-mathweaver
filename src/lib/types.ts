@@ -154,16 +154,15 @@ view.scale({ divide: 10 });",
     label: "Manim",
     tagline: "Animated video explanations",
     description:
-      "Embed pre-rendered Manim scenes as MP4 video. Paste a URL or use an attached file; the video plays with native browser controls.",
+      "Embed a pre-rendered Manim scene as MP4 video. Paste the filename of a .mp4 file in the app directory; the video plays with native browser controls.",
     icon: "▶",
     cdnJs: "",
     placeholder:
-      "https://example.com/your-manim-scene.mp4\
+      "scene.mp4\
 (Caption or explanation below.)",
     defaultContent:
-      "https://example.com/scene.mp4\
-# Manim Scene\
-Describe what this animation shows.",
+      "scene.mp4\
+Describing what this animation shows.",
   },
   geogebra: {
     type: "geogebra",

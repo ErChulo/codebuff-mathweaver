@@ -315,16 +315,16 @@ const MathLiveBody = memo(function MathLiveBody({ content }: { content: string }
 });
 
 // =========================================================
-// Manim — MP4 embed.
+// Manim — local MP4 video embed.
 // =========================================================
 const ManimBody = memo(function ManimBody({ content }: { content: string }) {
-  const { url, caption } = parseManim(content);
-  if (!url) {
+  const { filename, caption } = parseManim(content);
+  if (!filename) {
     return (
       <div className="p-5 text-sm text-muted-foreground">
-        Provide a video URL on the first line. Example:
+        Provide a video filename on the first line. The file must be in the same directory as the app.
         <pre className="mt-2 bg-black/30 p-3 rounded text-xs">
-{`https://example.com/scene.mp4
+{`scene.mp4
 Caption: short explanation here.`}
         </pre>
       </div>
@@ -333,7 +333,7 @@ Caption: short explanation here.`}
   return (
     <div className="p-5">
       <video
-        src={url}
+        src={filename}
         controls
         preload="metadata"
         className="w-full rounded-md border border-white/10 bg-black"
@@ -453,9 +453,9 @@ const GridBody = memo(function GridBody({ block }: { block: Block }) {
 
 function parseManim(raw: string) {
   const lines = raw.split(/\r?\n/);
-  const url = (lines[0] || "").trim();
+  const filename = (lines[0] || "").trim();
   const caption = lines.slice(1).join("\n").replace(/^#+\s*/, "").trim();
-  return { url, caption };
+  return { filename, caption };
 }
 
 // =========================================================
