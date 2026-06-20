@@ -245,8 +245,8 @@ export default function Landing() {
           to="/"
           className="group flex items-center gap-2.5 text-sm font-medium"
         >
-          <span className="size-8 rounded-xl bg-primary/15 flex items-center justify-center glow-ring transition-colors">
-            <span className="text-sm font-bold">∑</span>
+          <span className="size-8 rounded-xl overflow-hidden flex items-center justify-center bg-primary/15 glow-ring transition-colors">
+            <img src="logo.png" alt="Math Weaver" className="size-8 object-contain" />
           </span>
           <span>Math Weaver</span>
           <span className="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] uppercase tracking-[0.2em] text-muted-foreground glass-panel">
