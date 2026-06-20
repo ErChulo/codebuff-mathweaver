@@ -9,6 +9,7 @@ import {
   Database,
   Globe,
   Layers,
+  LayoutGrid,
   ListChecks,
   Plug,
   Server,
@@ -164,6 +165,17 @@ const TECHS: Tech[] = [
     accentClass: "quiz-cyan-text",
     ringClass: "from-[hsl(var(--quiz-cyan))] to-[hsl(var(--quiz-magenta))]",
   },
+  {
+    id: "grid",
+    name: "CSS Grid",
+    family: "frontend",
+    icon: LayoutGrid,
+    blurb: "Responsive, multi-column grid layouts for side-by-side content. Each cell can hold any block type — KaTeX, diagrams, plots — and auto-collapses on mobile.",
+    lessons: 0,
+    quizzes: 0,
+    accentClass: "quiz-cyan-text",
+    ringClass: "from-[hsl(var(--quiz-cyan))] to-[hsl(var(--quiz-magenta))]",
+  },
 ];
 
 const FAMILIES: { id: Tech["family"]; label: string; emoji: string }[] = [
@@ -242,7 +254,7 @@ export default function Technologies() {
               Browse the library
             </div>
             <h2 className="text-2xl md:text-3xl font-semibold">
-              Twelve stacks. One learning loop.
+              Browse the stacks. One learning loop.
             </h2>
           </div>
           <Link

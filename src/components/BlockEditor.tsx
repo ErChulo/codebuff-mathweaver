@@ -517,13 +517,13 @@ function GridEditorPanel({
           "grid grid-cols-1",
           gapClass,
           alignClass,
-          "grid-body",
+          responsive && "grid-body",
           "border border-dashed border-white/20 rounded-lg p-2"
         )}
         style={
-          {
-            "--grid-cols": columns,
-          } as React.CSSProperties
+          responsive
+            ? ({ "--grid-cols": columns } as React.CSSProperties)
+            : ({ gridTemplateColumns: `repeat(${columns}, 1fr)` } as React.CSSProperties)
         }
       >
         {cells.length === 0 ? (
