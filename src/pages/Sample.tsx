@@ -10,13 +10,19 @@ import {
   SAMPLE_LESSON_ID,
   SAMPLE_QUIZ,
   SAMPLE_QUIZ_ID,
+  SAMPLE_TRIG_LESSON,
+  SAMPLE_TRIG_LESSON_ID,
+  SAMPLE_TRIG_QUIZ,
+  SAMPLE_TRIG_QUIZ_ID,
 } from "@/lib/sampleLesson";
 import {
   ArrowRight,
   Database,
   Download,
   PlayCircle,
+  Sigma,
   Sparkles,
+  Waves,
 } from "lucide-react";
 import { toast } from "sonner";
 
@@ -35,21 +41,31 @@ import { toast } from "sonner";
  */
 export default function Sample() {
   const navigate = useNavigate();
+  const [lessonTab, setLessonTab] = useState<"ftc" | "trig">("ftc");
+
+  const activeLesson =
+    lessonTab === "trig" ? SAMPLE_TRIG_LESSON : SAMPLE_LESSON;
+  const activeQuiz =
+    lessonTab === "trig" ? SAMPLE_TRIG_QUIZ : SAMPLE_QUIZ;
+  const activeLessonId =
+    lessonTab === "trig" ? SAMPLE_TRIG_LESSON_ID : SAMPLE_LESSON_ID;
+  const activeQuizId =
+    lessonTab === "trig" ? SAMPLE_TRIG_QUIZ_ID : SAMPLE_QUIZ_ID;
 
   async function importToStudio() {
     try {
       await createLesson({
-        id: SAMPLE_LESSON_ID,
-        title: SAMPLE_LESSON.title,
-        description: SAMPLE_LESSON.description,
-        blocks: SAMPLE_LESSON.blocks,
+        id: activeLessonId,
+        title: activeLesson.title,
+        description: activeLesson.description,
+        blocks: activeLesson.blocks,
       });
       await createQuiz({
-        id: SAMPLE_QUIZ_ID,
-        title: SAMPLE_QUIZ.title,
-        description: SAMPLE_QUIZ.description,
-        lessonId: SAMPLE_QUIZ.lessonId,
-        questions: SAMPLE_QUIZ.questions,
+        id: activeQuizId,
+        title: activeQuiz.title,
+        description: activeQuiz.description,
+        lessonId: activeQuiz.lessonId,
+        questions: activeQuiz.questions,
       });
       toast.success("Sample lesson + quiz saved to your studio.");
       navigate("/lessons");
@@ -60,19 +76,59 @@ export default function Sample() {
 
   function startQuiz() {
     importToStudio()
-      .then(() => navigate(`/quiz/${SAMPLE_QUIZ_ID}`))
+      .then(() => navigate(`/quiz/${activeQuizId}`))
       .catch(() => undefined);
   }
 
   function downloadJson() {
-    downloadLessonAsJson(
-      SAMPLE_LESSON,
-      "sample_fundamental-theorem.json"
-    );
+    const filename =
+      lessonTab === "trig"
+        ? "sample_trigonometric-functions.json"
+        : "sample_fundamental-theorem.json";
+    downloadLessonAsJson(activeLesson, filename);
   }
 
+  const TABS = [
+    {
+      id: "ftc" as const,
+      label: "FTC",
+      icon: Sigma,
+      title: "The Fundamental Theorem of Calculus",
+      description:
+        "A full, interactive lesson composed entirely in Math Weaver — five block types, working together. Take its quiz to prove the idea survived you, then download the bundle as JSON to use as a starting template.",
+    },
+    {
+      id: "trig" as const,
+      label: "Trig",
+      icon: Waves,
+      title: "Trigonometric Functions: From the Unit Circle to Waves",
+      description:
+        "A guided tour of trigonometry showcasing all 11 block types — HTML, KaTeX, JSXGraph, Mermaid, Plotly, GeoGebra, Arquero, MathBox, MathLive, Manim, and CSS Grid — working together in a single lesson.",
+    },
+  ];
+
+  const activeTab = TABS.find((t) => t.id === lessonTab)!;
+
   return (
-    <div className="space-y-8 max-w-4xl mx-auto">
+    <div className="space-y-8 max-w-6xl mx-auto">
+      {/* Lesson tabs */}
+      <div className="flex gap-1.5 glass-panel p-1 w-fit">
+        {TABS.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setLessonTab(tab.id)}
+            className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+              lessonTab === tab.id
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+            }`}
+          >
+            <tab.icon className="size-4" />
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
       {/* Hero */}
       <section className="relative overflow-hidden glass-card-strong p-8 md:p-10 quiz-glow-border">
         <div className="absolute inset-0 pointer-events-none">
@@ -81,18 +137,16 @@ export default function Sample() {
         </div>
         <div className="relative space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-panel text-xs uppercase tracking-[0.3em] text-muted-foreground">
-            <Sparkles className="size-3 quiz-cyan-text" /> Sample
+            <activeTab.icon className="size-3 quiz-cyan-text" />{" "}
+            {activeTab.label} sample
           </div>
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
             <span className="bg-gradient-to-r from-[hsl(var(--quiz-cyan))] via-[hsl(var(--quiz-magenta))] to-[hsl(var(--quiz-cyan))] bg-clip-text text-transparent">
-              The Fundamental Theorem of Calculus
+              {activeTab.title}
             </span>
           </h1>
           <p className="text-muted-foreground max-w-2xl leading-relaxed">
-            A full, interactive lesson composed entirely in Math Weaver — five
-            block types, working together. Take its quiz to prove the idea
-            survived you, then download the bundle as JSON to use as a
-            starting template for your own authoring.
+            {activeTab.description}
           </p>
           <div className="flex flex-wrap gap-3 pt-1">
             <button
@@ -115,8 +169,8 @@ export default function Sample() {
             </button>
           </div>
           <p className="text-[11px] text-muted-foreground pt-1">
-            Stable ids: <code>{SAMPLE_LESSON_ID}</code>,{" "}
-            <code>{SAMPLE_QUIZ_ID}</code>. Re-importing is idempotent.
+            Stable ids: <code>{activeLessonId}</code>,{" "}
+            <code>{activeQuizId}</code>. Re-importing is idempotent.
           </p>
         </div>
       </section>
@@ -126,11 +180,11 @@ export default function Sample() {
         <div className="flex items-baseline justify-between gap-2">
           <h2 className="text-xl font-semibold">Lesson preview</h2>
           <span className="text-xs text-muted-foreground">
-            {SAMPLE_LESSON.blocks.length} blocks · Rendered live
+            {activeLesson.blocks.length} blocks · Rendered live
           </span>
         </div>
         <article className="space-y-5">
-          {SAMPLE_LESSON.blocks.map((b, i) => (
+          {activeLesson.blocks.map((b, i) => (
             <motion.div
               key={b.id}
               initial={{ opacity: 0, y: 6 }}
@@ -148,18 +202,18 @@ export default function Sample() {
         <div className="flex items-baseline justify-between gap-2">
           <h2 className="text-xl font-semibold">Quiz preview</h2>
           <span className="text-xs text-muted-foreground">
-            {SAMPLE_QUIZ.questions.length} questions · not saved until you click Take
+            {activeQuiz.questions.length} questions · not saved until you click Take
           </span>
         </div>
         <div className="space-y-3">
-          {SAMPLE_QUIZ.questions.map((q, i) => (
+          {activeQuiz.questions.map((q, i) => (
             <div key={q.id} className="glass-card p-4">
               <div className="flex items-center gap-2">
                 <span className="size-7 rounded-md bg-primary/20 flex items-center justify-center text-xs font-bold glow-text">
                   Q{i + 1}
                 </span>
                 <span className="text-sm font-medium">
-                  Question {i + 1} of {SAMPLE_QUIZ.questions.length}
+                  Question {i + 1} of {activeQuiz.questions.length}
                 </span>
               </div>
               <div className="mt-2 text-sm leading-relaxed">
@@ -205,8 +259,8 @@ export default function Sample() {
 
 {
   "id": "<stable id>",
-  "title": "The Fundamental Theorem of Calculus",
-  "description": "From rectangles to the integral in five steps — …",
+  "title": "${activeLesson.title}",
+  "description": "${activeLesson.description}",
   "blocks": Block[]
 }
 

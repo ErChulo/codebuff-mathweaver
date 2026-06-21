@@ -319,6 +319,7 @@ const MathLiveBody = memo(function MathLiveBody({ content }: { content: string }
 // =========================================================
 const ManimBody = memo(function ManimBody({ content }: { content: string }) {
   const { filename, caption } = parseManim(content);
+  const [loadError, setLoadError] = useState(false);
   if (!filename) {
     return (
       <div className="p-5 text-sm text-muted-foreground">
@@ -330,12 +331,29 @@ Caption: short explanation here.`}
       </div>
     );
   }
+  if (loadError) {
+    return (
+      <div className="p-5 text-sm text-muted-foreground">
+        <div className="glass-panel p-4 text-center">
+          <p className="font-medium mb-1">Video not found</p>
+          <p className="text-xs">
+            The file <code className="text-foreground/80">{filename}</code> could not be loaded.
+            Make sure it is in the app directory and try again.
+          </p>
+        </div>
+        {caption && (
+          <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{caption}</p>
+        )}
+      </div>
+    );
+  }
   return (
     <div className="p-5">
       <video
         src={filename}
         controls
         preload="metadata"
+        onError={() => setLoadError(true)}
         className="w-full rounded-md border border-white/10 bg-black"
       />
       {caption && (
@@ -466,7 +484,7 @@ function buildScriptSandbox(script: string, kind: "jsxgraph" | "mathbox"): strin
   const meta = TECH[kind];
 
   const initScript = kind === "mathbox"
-    ? `const box = mathbox({ element: document.getElementById('box') });
+    ? `const box = MathBox.mathBox({ element: document.getElementById('box'), controls: { klass: THREE.OrbitControls } });
   const view = box.viewport({ ratio: 16/10, scaled: true });
   const cartesian = view.cartesian({ range: [[-2, 2], [-2, 2], [-2, 2]] });
   try { ${escapeForScript(script)} } catch (e) { document.body.appendChild(Object.assign(document.createElement('pre'), { textContent: String(e), style: 'color:red;padding:1rem' })); }`
@@ -481,6 +499,12 @@ function buildScriptSandbox(script: string, kind: "jsxgraph" | "mathbox"): strin
     ? `<link rel="stylesheet" href="${meta.cdnCss}">`
     : "";
 
+  // MathBox requires Three.js and OrbitControls loaded before it.
+  const extraScripts = kind === "mathbox"
+    ? `<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"><\/script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"><\/script>`
+    : "";
+
   return `<!doctype html>
 <html>
 <head>
@@ -493,6 +517,7 @@ ${cssLink}
 </head>
 <body>
 ${boxDiv}
+${extraScripts}
 <script src="${meta.cdnJs}"><\/script>
 <script>${initScript}<\/script>
 </body>
