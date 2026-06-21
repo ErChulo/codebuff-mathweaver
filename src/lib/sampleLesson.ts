@@ -17,7 +17,7 @@ const blocks: Block[] = [
   {
     id: "b_sample_riemann",
     type: "katex",
-    content: `A = \\lim_{n\to\\infty} \\sum_{i=1}^{n} f(x_i)\,\\Delta x`,
+    content: `A = \\\\lim_{n\\to\\\\infty} \\\\sum_{i=1}^{n} f(x_i)\\,\\\\Delta x`,
   },
   {
     id: "b_sample_visual",
@@ -44,7 +44,7 @@ board.create("text", [b - 0.6, 0.2, "Riemann rectangles"], { color: "#fff" });`,
   {
     id: "b_sample_integral",
     type: "katex",
-    content: `\\int_a^b f(x)\,dx = \\lim_{n\to\\infty} \\sum_{i=1}^{n} f(x_i)\,\\Delta x`,
+    content: `\\\\int_a^b f(x)\\,dx = \\\\lim_{n\\to\\\\infty} \\\\sum_{i=1}^{n} f(x_i)\\,\\\\Delta x`,
   },
   {
     id: "b_sample_flow",
@@ -98,7 +98,7 @@ board.create("text", [b - 0.6, 0.2, "Riemann rectangles"], { color: "#fff" });`,
   {
     id: "b_sample_key",
     type: "katex",
-    content: `\\int_a^b f(x)\,dx = F(b) - F(a) \\quad\text{where}\\quad F'(x) = f(x)`,
+    content: `\\\\int_a^b f(x)\\,dx = F(b) - F(a) \\\\quad\\text{where}\\\\quad F'(x) = f(x)`,
   },
   {
     id: "b_sample_close",
@@ -142,7 +142,7 @@ board.create("text", [b - 0.6, 0.2, "Riemann rectangles"], { color: "#fff" });`,
             {
               id: "bg_2col_katex",
               type: "katex",
-              content: `\\sum_{i=1}^{n} f(x_i)\,\\Delta x \\quad\text{approximates}\\quad \\int_a^b f(x)\,dx`,
+              content: `\\\\sum_{i=1}^{n} f(x_i)\\,\\\\Delta x \\\\quad\\text{approximates}\\\\quad \\\\int_a^b f(x)\\,dx`,
             },
           ],
         },
@@ -171,7 +171,7 @@ Rate of change at a point. Slope of the tangent line.</p>`,
             {
               id: "bg_3col_katex_1",
               type: "katex",
-              content: `f'(x) = \\lim_{h\to 0}\\frac{f(x+h)-f(x)}{h}`,
+              content: `f'(x) = \\\\lim_{h\\to 0}\\\\frac{f(x+h)-f(x)}{h}`,
             },
           ],
         },
@@ -187,7 +187,7 @@ Accumulated area under a curve over an interval.</p>`,
             {
               id: "bg_3col_katex_2",
               type: "katex",
-              content: `\\int_a^b f(x)\,dx`,
+              content: `\\\\int_a^b f(x)\\,dx`,
             },
           ],
         },
@@ -203,7 +203,7 @@ Derivatives and integrals are inverse operations.</p>`,
             {
               id: "bg_3col_katex_3",
               type: "katex",
-              content: `\\int_a^b f = F(b) - F(a)`,
+              content: `\\\\int_a^b f = F(b) - F(a)`,
             },
           ],
         },
@@ -277,18 +277,18 @@ export const SAMPLE_QUIZ: Quiz = {
     {
       id: "q_sample_1",
       prompt:
-        "Which expression is the left-endpoint Riemann sum for $\\int_0^1 x^2\\,dx$ with $n$ equal subintervals?",
+        "Which expression is the left-endpoint Riemann sum for $\\\\int_0^1 x^2\\\\,dx$ with $n$ equal subintervals?",
       options: [
-        { id: "q1_a", label: "$\\dfrac{1}{n}\\sum_{i=1}^{n}\\left(\\dfrac{i}{n}\\right)^{2}$" },
-        { id: "q1_b", label: "$\\sum_{i=1}^{n}\\left(\\dfrac{i}{n}\\right)^{2}$" },
-        { id: "q1_c", label: "$\\dfrac{1}{n}\\sum_{i=0}^{n-1}\\left(\\dfrac{i}{n}\\right)^{2}$" },
-        { id: "q1_d", label: "$\\int_0^1 x\\,dx$" },
+        { id: "q1_a", label: "$\\\\dfrac{1}{n}\\\\sum_{i=1}^{n}\\\\left(\\\\dfrac{i}{n}\\\\right)^{2}$" },
+        { id: "q1_b", label: "$\\\\sum_{i=1}^{n}\\\\left(\\\\dfrac{i}{n}\\\\right)^{2}$" },
+        { id: "q1_c", label: "$\\\\dfrac{1}{n}\\\\sum_{i=0}^{n-1}\\\\left(\\\\dfrac{i}{n}\\\\right)^{2}$" },
+        { id: "q1_d", label: "$\\\\int_0^1 x\\\\,dx$" },
       ],
       correctIndex: 0,
     },
     {
       id: "q_sample_2",
-      prompt: "Evaluate $\\int_0^2 3\\,dx$.",
+      prompt: "Evaluate $\\\\int_0^2 3\\\\,dx$.",
       options: [
         { id: "q2_a", label: "$3$" },
         { id: "q2_b", label: "$6$" },
@@ -340,7 +340,7 @@ export const SAMPLE_QUIZ: Quiz = {
       ],
       options: [
         { id: "q4_a", label: "The derivative of sin(x)" },
-        { id: "q4_b", label: "A left-endpoint Riemann approximation of $\\int_0^{\\pi}\\sin x\\,dx$" },
+        { id: "q4_b", label: "A left-endpoint Riemann approximation of $\\\\int_0^{\\\\pi}\\\\sin x\\\\,dx$" },
         { id: "q4_c", label: "The Fourier series of sin(x)" },
         { id: "q4_d", label: "A histogram of random samples" },
       ],
@@ -348,10 +348,10 @@ export const SAMPLE_QUIZ: Quiz = {
     },
     {
       id: "q_sample_5",
-      prompt: "What is the next step AFTER summing $f(x_i)\\Delta x$ in the Riemann construction?",
+      prompt: "What is the next step AFTER summing $f(x_i)\\\\Delta x$ in the Riemann construction?",
       options: [
         { id: "q5_a", label: "Integrate term-by-term" },
-        { id: "q5_b", label: "Let $\\Delta x \\to 0$ (i.e. send $n \\to \\infty$)" },
+        { id: "q5_b", label: "Let $\\\\Delta x \\\\to 0$ (i.e. send $n \\\\to \\\\infty$)" },
         { id: "q5_c", label: "Replace $f$ with a constant" },
         { id: "q5_d", label: "Take the derivative" },
       ],
@@ -387,12 +387,12 @@ const trigBlocks: Block[] = [
   {
     id: "b_trig_unit_circle",
     type: "katex",
-    content: `\\sin^2\\theta + \\cos^2\\theta = 1 \\quad \text{(Pythagorean identity)}`,
+    content: `\\\\sin^2\\\\theta + \\\\cos^2\\\\theta = 1 \\\\quad \\text{(Pythagorean identity)}`,
   },
   {
     id: "b_trig_angle_sum",
     type: "katex",
-    content: `\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta`,
+    content: `\\\\sin(\\\\alpha + \\\\beta) = \\\\sin\\\\alpha\\\\cos\\\\beta + \\\\cos\\\\alpha\\\\sin\\\\beta`,
   },
 
   // ========================================
@@ -480,7 +480,7 @@ board.create("text", [0, 0.9, function() { return "cos = " + Math.cos(angle.Valu
             {
               id: "bg_trig_compare_katex",
               type: "katex",
-              content: `f(x) = A\\cdot\\sin(\\omega x + \\phi) + k`,
+              content: `f(x) = A\\\\cdot\\\\sin(\\\\omega x + \\\\phi) + k`,
             },
           ],
         },
@@ -630,23 +630,202 @@ data
   {
     id: "b_trig_mathlive",
     type: "mathlive",
-    content: `\\sin^2 \\theta + \\cos^2 \\theta = 1`,
+    content: `\\\\sin^2 \\\\theta + \\\\cos^2 \\\\theta = 1`,
   },
 
   // ========================================
-  // Section 11: Manim — Animation
+  // Section 11: Canvas — Unit Circle → Sine Wave Animation
   // ========================================
   {
-    id: "b_trig_manim_intro",
+    id: "b_trig_canvas_animation",
     type: "html",
-    content: `<p>The animation below visualizes how the unit circle generates the sine wave. As the point rotates around the circle, its y-coordinate traces the familiar wave pattern.</p>`,
-  },
-  {
-    id: "b_trig_manim",
-    type: "manim",
-    content: `trig_waves.mp4
-# Unit circle to sine wave
-An animation showing a point rotating around the unit circle while tracing the sine wave below.`,
+    content: `<style>
+  .uc-wrap { position: relative; max-width: 780px; margin: 0 auto; background: #0a0a1a; border-radius: 12px; overflow: hidden; }
+  .uc-wrap canvas { display: block; width: 100%; height: auto; aspect-ratio: 780 / 380; }
+  .uc-overlay { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
+  .uc-overlay button {
+    background: rgba(255,255,255,0.08); color: #ccc; border: 1px solid rgba(255,255,255,0.12);
+    padding: 4px 14px; border-radius: 6px; font-size: 11px; cursor: pointer; transition: all 0.15s;
+  }
+  .uc-overlay button:hover { background: rgba(255,255,255,0.15); color: #fff; }
+</style>
+<div class="uc-wrap">
+  <canvas id="ucCanvas" width="780" height="380"></canvas>
+  <div class="uc-overlay">
+    <button id="ucPlayBtn">⏸ Pause</button>
+    <button id="ucResetBtn">↺ Reset</button>
+  </div>
+</div>
+<script>
+(function(){
+  const c = document.getElementById('ucCanvas');
+  const ctx = c.getContext('2d');
+  const W = 780, H = 380;
+  const cx = 170, cy = 190, R = 120;   // unit circle center & radius
+  const graphL = 320, graphR = 750;     // sine graph x range
+  const graphY = 190, graphH = 100;     // sine graph vertical center & half-height
+  const pts = [];                       // traced sine points
+  let theta = 0, running = true, animId = null;
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const sinVal = Math.sin(theta);
+    const cosVal = Math.cos(theta);
+    const px = cx + R * cosVal;
+    const py = cy - R * sinVal;  // flip y for screen
+
+    // ---- Unit circle (left side) ----
+    ctx.beginPath();
+    ctx.arc(cx, cy, R, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(125, 211, 252, 0.25)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    // Axes
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(cx - R - 10, cy); ctx.lineTo(cx + R + 10, cy); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(cx, cy - R - 10); ctx.lineTo(cx, cy + R + 10); ctx.stroke();
+
+    // Radius line
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(px, py);
+    ctx.strokeStyle = 'rgba(167, 139, 250, 0.5)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    // Angle arc
+    ctx.beginPath();
+    ctx.arc(cx, cy, 30, -theta, 0);
+    ctx.strokeStyle = 'rgba(167, 139, 250, 0.4)';
+    ctx.stroke();
+
+    // Theta label
+    ctx.fillStyle = '#a78bfa';
+    ctx.font = '12px ui-sans-serif, system-ui';
+    ctx.fillText('θ', cx + 38, cy - 8);
+
+    // Point on circle
+    ctx.beginPath();
+    ctx.arc(px, py, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#f472b6';
+    ctx.fill();
+
+    // Vertical dashed line from point to x-axis
+    ctx.setLineDash([3, 4]);
+    ctx.beginPath();
+    ctx.moveTo(px, py);
+    ctx.lineTo(px, cy);
+    ctx.strokeStyle = 'rgba(244, 114, 182, 0.3)';
+    ctx.lineWidth = 1;
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // sin value text
+    ctx.fillStyle = '#f472b6';
+    ctx.font = 'bold 13px ui-sans-serif, system-ui';
+    ctx.fillText('sin θ = ' + sinVal.toFixed(3), cx - 50, cy + R + 28);
+    ctx.fillStyle = '#7dd3fc';
+    ctx.fillText('cos θ = ' + cosVal.toFixed(3), cx - 50, cy + R + 46);
+
+    // ---- Sine wave (right side) ----
+    // Grid lines
+    for (let v = -1; v <= 1; v += 0.5) {
+      const gy = graphY - v * graphH;
+      ctx.beginPath();
+      ctx.moveTo(graphL, gy);
+      ctx.lineTo(graphR, gy);
+      ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+      ctx.stroke();
+      ctx.fillStyle = 'rgba(255,255,255,0.15)';
+      ctx.font = '9px ui-sans-serif, system-ui';
+      ctx.fillText(v.toFixed(1), graphL - 18, gy + 3);
+    }
+
+    // Label
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.font = '11px ui-sans-serif, system-ui';
+    ctx.fillText('sin(θ)', graphR - 50, graphY - graphH - 8);
+
+    // Static reference sine (faint)
+    ctx.strokeStyle = 'rgba(244, 114, 182, 0.1)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (let i = 0; i <= 200; i++) {
+      const t = (i / 200) * Math.PI * 4;
+      const x = graphL + (i / 200) * (graphR - graphL);
+      const y = graphY - graphH * Math.sin(t);
+      i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Add current point to trace
+    const traceX = graphL + (theta / (Math.PI * 4)) * (graphR - graphL);
+    if (traceX <= graphR) {
+      pts.push({ x: traceX, y: graphY - graphH * sinVal });
+    }
+
+    // Draw traced path
+    if (pts.length > 1) {
+      ctx.strokeStyle = '#f472b6';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(pts[0].x, pts[0].y);
+      for (let i = 1; i < pts.length; i++) {
+        ctx.lineTo(pts[i].x, pts[i].y);
+      }
+      ctx.stroke();
+    }
+
+    // Current point on graph (glowing dot)
+    if (pts.length > 0) {
+      const last = pts[pts.length - 1];
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 4, 0, Math.PI * 2);
+      ctx.fillStyle = '#f472b6';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(last.x, last.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(244, 114, 182, 0.2)';
+      ctx.fill();
+    }
+
+    // Angle label in degrees
+    const deg = ((theta * 180 / Math.PI) % 360).toFixed(0);
+    ctx.fillStyle = 'rgba(255,255,255,0.5)';
+    ctx.font = '11px ui-sans-serif, system-ui';
+    ctx.fillText(deg + '°', cx + R + 14, cy + 4);
+  }
+
+  function tick() {
+    if (!running) return;
+    theta += 0.025;
+    if (theta > Math.PI * 4) {
+      theta = 0;
+      pts.length = 0;
+    }
+    draw();
+    animId = requestAnimationFrame(tick);
+  }
+
+  // Controls
+  document.getElementById('ucPlayBtn').onclick = function(e) {
+    running = !running;
+    e.target.textContent = running ? '⏸ Pause' : '▶ Play';
+    if (running) animId = requestAnimationFrame(tick);
+  };
+  document.getElementById('ucResetBtn').onclick = function() {
+    theta = 0;
+    pts.length = 0;
+    draw();
+    if (!running) { running = true; document.getElementById('ucPlayBtn').textContent = '⏸ Pause'; animId = requestAnimationFrame(tick); }
+  };
+
+  draw();
+  animId = requestAnimationFrame(tick);
+})();
+</script>`,
   },
 
   // ========================================
@@ -679,7 +858,7 @@ The Pythagorean identity <code>sin²θ + cos²θ = 1</code> is the foundation. F
             {
               id: "bg_trig_summary_1_katex",
               type: "katex",
-              content: `1 + \\tan^2\\theta = \\sec^2\\theta`,
+              content: `1 + \\\\tan^2\\\\theta = \\\\sec^2\\\\theta`,
             },
           ],
         },
@@ -695,7 +874,7 @@ Sine and cosine oscillate between −1 and 1 with period 2π. Tangent has vertic
             {
               id: "bg_trig_summary_2_katex",
               type: "katex",
-              content: `\\text{Period} = \\frac{2\\pi}{|\\omega|}`,
+              content: `\\\\text{Period} = \\\\frac{2\\\\pi}{|\\\\omega|}`,
             },
           ],
         },
@@ -711,7 +890,7 @@ Sound waves, tides, alternating current, seasonal patterns, and circular motion 
             {
               id: "bg_trig_summary_3_katex",
               type: "katex",
-              content: `f(t) = A\\sin(2\\pi ft + \\phi)`,
+              content: `f(t) = A\\\\sin(2\\\\pi ft + \\\\phi)`,
             },
           ],
         },
@@ -724,7 +903,7 @@ export const SAMPLE_TRIG_LESSON: Lesson = {
   id: SAMPLE_TRIG_LESSON_ID,
   title: "Trigonometric Functions: From the Unit Circle to Waves",
   description:
-    "A guided tour of trigonometry — the unit circle, sine and cosine waves, tangent, identities, and real-world oscillations — brought to life through HTML, KaTeX, JSXGraph, Mermaid, Plotly, GeoGebra, Arquero, MathBox, MathLive, Manim, and CSS Grid blocks.",
+    "A guided tour of trigonometry — the unit circle, sine and cosine waves, tangent, identities, and real-world oscillations — brought to life through HTML, KaTeX, JSXGraph, Mermaid, Plotly, GeoGebra, Arquero, MathBox, MathLive, Canvas, and CSS Grid blocks.",
   blocks: trigBlocks,
   createdAt: 0,
   updatedAt: 0,

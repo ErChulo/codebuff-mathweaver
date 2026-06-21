@@ -73,8 +73,27 @@ const BlockBody = memo(function BlockBody({ block, meta }: { block: Block; meta:
 // =========================================================
 // Note: this block is intended for trusted authored content.
 const HtmlBody = memo(function HtmlBody({ content }: { content: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  // Scripts inserted via dangerouslySetInnerHTML are parsed into DOM nodes but
+  // never executed by the browser.  This effect re-creates them so they run.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const scripts = el.querySelectorAll<HTMLScriptElement>("script");
+    scripts.forEach((oldScript) => {
+      const newScript = document.createElement("script");
+      for (const attr of oldScript.attributes) {
+        newScript.setAttribute(attr.name, attr.value);
+      }
+      newScript.textContent = oldScript.textContent;
+      oldScript.parentNode?.replaceChild(newScript, oldScript);
+    });
+  }, [content]);
+
   return (
     <div
+      ref={ref}
       className="prose-lesson p-5 text-[15px] leading-relaxed"
       // eslint-disable-next-line react/no-danger -- authored HTML is the goal here.
       dangerouslySetInnerHTML={{ __html: content }}
