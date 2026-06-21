@@ -392,7 +392,7 @@ const trigBlocks: Block[] = [
   {
     id: "b_trig_angle_sum",
     type: "katex",
-    content: `\sin(\alpha + \beta) = \sin\alpha\cos\beta + \cos\alpha\sin\beta`,
+    content: `\\sin(\\alpha + \\beta) = \\sin\\alpha\\cos\\beta + \\cos\\alpha\\sin\\beta`,
   },
 
   // ========================================
@@ -480,7 +480,7 @@ board.create("text", [0, 0.9, function() { return "cos = " + Math.cos(angle.Valu
             {
               id: "bg_trig_compare_katex",
               type: "katex",
-              content: `f(x) = A\cdot\sin(\omega x + \phi) + k`,
+              content: `f(x) = A\\cdot\\sin(\\omega x + \\phi) + k`,
             },
           ],
         },
@@ -630,7 +630,7 @@ data
   {
     id: "b_trig_mathlive",
     type: "mathlive",
-    content: `\sin^2 \theta + \cos^2 \theta = 1`,
+    content: `\\sin^2 \\theta + \\cos^2 \\theta = 1`,
   },
 
   // ========================================
@@ -679,7 +679,7 @@ The Pythagorean identity <code>sin²θ + cos²θ = 1</code> is the foundation. F
             {
               id: "bg_trig_summary_1_katex",
               type: "katex",
-              content: `1 + \tan^2\theta = \sec^2\theta`,
+              content: `1 + \\tan^2\\theta = \\sec^2\\theta`,
             },
           ],
         },
@@ -695,7 +695,7 @@ Sine and cosine oscillate between −1 and 1 with period 2π. Tangent has vertic
             {
               id: "bg_trig_summary_2_katex",
               type: "katex",
-              content: `\text{Period} = \frac{2\pi}{|\omega|}`,
+              content: `\\text{Period} = \\frac{2\\pi}{|\\omega|}`,
             },
           ],
         },
@@ -711,7 +711,7 @@ Sound waves, tides, alternating current, seasonal patterns, and circular motion 
             {
               id: "bg_trig_summary_3_katex",
               type: "katex",
-              content: `f(t) = A\sin(2\pi ft + \phi)`,
+              content: `f(t) = A\\sin(2\\pi ft + \\phi)`,
             },
           ],
         },
