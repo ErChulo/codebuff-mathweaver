@@ -291,8 +291,7 @@ function KatexPrompt({ text }: { text: string }) {
   while (i < text.length) {
     if (text[i] === "$") {
       const end = text.indexOf("$", i + 1);
-      if (end !== -1 && !text.slice(i + 1, end).includes("\
-")) {
+      if (end !== -1 && !text.slice(i + 1, end).includes("\n")) {
         if (buf) segs.push({ kind: "text", value: buf });
         buf = "";
         segs.push({ kind: "math", value: text.slice(i + 1, end) });
