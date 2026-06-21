@@ -613,7 +613,7 @@ view.line({
   { angle: 180, sin: 0, cos: -1, tan: 0 }
 ]);
 data
-  .filter(d => d.tan !== Infinity && !isNaN(d.tan))
+  .filter(aq.escape(d => d.tan !== Infinity && !isNaN(d.tan)))
   .select("angle", "sin", "cos", "tan")
   .orderby("tan", "desc")
   .print();`,

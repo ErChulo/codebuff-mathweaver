@@ -301,7 +301,7 @@ view.line({
   { angle: 180, sin: 0, cos: -1, tan: 0 }
 ]);
 data
-  .filter(d => d.tan !== Infinity && !isNaN(d.tan))
+  .filter(aq.escape(d => d.tan !== Infinity && !isNaN(d.tan)))
   .select("angle", "sin", "cos", "tan")
   .orderby("tan", "desc")
   .print();`},{id:"b_trig_mathlive_intro",type:"html",content:"<p>The editable field below shows the Pythagorean identity. Click into it to modify the formula — try changing <code>sin²</code> to <code>sin</code> or swapping <code>cos²</code> for <code>tan²</code>.</p>"},{id:"b_trig_mathlive",type:"mathlive",content:"sin^2 	heta + cos^2 	heta = 1"},{id:"b_trig_manim_intro",type:"html",content:"<p>The animation below visualizes how the unit circle generates the sine wave. As the point rotates around the circle, its y-coordinate traces the familiar wave pattern.</p>"},{id:"b_trig_manim",type:"manim",content:`trig_waves.mp4
